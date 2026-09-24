@@ -671,3 +671,26 @@ Copyright (c) 2024 VisionWire AI
 - ✅ All Indian States + International
 
 **Everything. Everyone. Everywhere. 🌍**
+
+---
+
+## 🔧 Wave-1 fix notes (2026-09-24)
+
+- **Real scraper:** `visionwire_advanced_scraper.py` now performs real HTTP fetches —
+  Wikipedia REST summary API first, then BeautifulSoup parsing of the article HTML —
+  with a local file cache. The old simulated/mock content generator was deleted.
+- **Real LLM client:** `visionwire_hybrid.py` now calls the OpenRouter chat-completions
+  API with the key read from the `OPENROUTER_API_KEY` environment variable (loaded from
+  `.env` via `python-dotenv`). There is **no mock fallback**: without a key it raises
+  a clear `RuntimeError` telling you to set the key. Verified 2026-09-24: real
+  Wikipedia fetch for "Photosynthesis" returned 977 chars; the LLM client raises the
+  documented error when no key is set (no key was available in the sandbox, so the
+  live LLM call itself is untested — add your key to `.env` and rerun).
+
+### Setup
+```bash
+pip install -r requirements.txt
+# put your key in .env:
+echo "OPENROUTER_API_KEY=sk-your-real-key" > .env
+python visionwire_universal_app.py
+```
