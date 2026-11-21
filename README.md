@@ -1,5 +1,7 @@
 # 🚀 VisionWire AI - Complete Installation Package
 
+Built by [VisionQuantech](https://visionquantech.com) — AI agents, apps & tools for small businesses.
+
 ## 📦 Package Contents
 
 ```
